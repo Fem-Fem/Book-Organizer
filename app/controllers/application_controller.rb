@@ -58,8 +58,22 @@ class ApplicationController < Sinatra::Base
       session[:user_id].delete
       redirect to '/'
     else
-      redirect to '/login'
+      redirect to '/homepage'
     end
+  end
+
+  get '/books/new' do
+    if session[:user_id] == nil
+      redirect to '/homepage'
+    else
+      erb :createbook
+    end
+  end
+
+  post '/books/new' do
+    @owner = Owner.find(session[:user_id])
+    @owner.book = Book.create(params)
+    redirect to '/books'
   end
 
 end
