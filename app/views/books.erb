@@ -1,0 +1,13 @@
+<html>
+  <head>
+    <title>So Many Books!</title>
+  </head>
+  <body>
+
+    <% @books.each do |book| %>
+    <h1><%= Book.title %></h1>
+    <h1><%= Book.genre %></h1>
+    <% end %>
+
+  </body>
+</html>

@@ -62,6 +62,15 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+  get '/books' do
+    if session[:user_id] == nil
+      redirect to '/'
+    else
+      @books = Book.all
+      erb :books
+    end
+  end
+
   get '/books/new' do
     if session[:user_id] == nil
       redirect to '/homepage'
