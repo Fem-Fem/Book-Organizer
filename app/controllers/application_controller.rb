@@ -85,4 +85,18 @@ class ApplicationController < Sinatra::Base
     redirect to '/books'
   end
 
+  get '/book/<%= params[:id]%>/edit' do
+    if params[:id].user_id != @user.id
+      redirect to '/books'
+    else
+      erb :editbook
+    end
+  end
+
+  patch '/book/<%= params[:id]%>/edit' do
+    @book = Book.find(params["id"])
+    @book.title = params["title"]
+    @book.genre = params["genre"]
+  end
+
 end
