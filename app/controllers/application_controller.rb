@@ -9,11 +9,19 @@ class ApplicationController < Sinatra::Base
 
 
   get '/' do
-    erb: homepage
+    if session[:user_id] == nil
+      erb :homepage
+    else
+      redirect to '/allbooks'
+    end
   end
 
   get '/signup' do
-    erb :signup
+    if session[:user_id] == nil
+      erb :signup
+    else
+      redirect to '/allbooks'
+    end
   end
 
   post '/signup' do
@@ -27,7 +35,11 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/login' do
-    erb :login
+    if session[:user_id] == nil
+      erb :login
+    else
+      redirect to '/allbooks'
+    end
   end
 
   post '/login' do
