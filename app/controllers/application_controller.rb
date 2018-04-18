@@ -9,12 +9,21 @@ class ApplicationController < Sinatra::Base
 
 
   get '/' do
+    erb: homepage
   end
 
   get '/signup' do
+    erb :signup
   end
 
   post '/signup' do
+    if params["username"] == "" || params["password"] == ""
+      redirect to '/signup'
+    else
+      @owner = Owner.create(params["username"], params["password"])
+      session[:user_id] == @owner.id
+      redirect to '/allbooks'
+    end
   end
 
   get '/login' do
