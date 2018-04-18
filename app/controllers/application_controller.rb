@@ -27,9 +27,18 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/login' do
+    erb :login
   end
 
   post '/login' do
+    if params["username"] == "" || params["password"] == ""
+      redirect to '/login'
+    else
+      #password?
+      @owner = Owner.find_by(username: params["username"])
+      session[:user_id] == @owner.id
+      redirect to '/allbooks'
+    end
   end
 
 
