@@ -53,5 +53,13 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+  get '/logout' do
+    if session[:user_id] != nil
+      session[:user_id].delete
+      redirect to '/'
+    else
+      redirect to '/login'
+    end
+  end
 
 end
