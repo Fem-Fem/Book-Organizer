@@ -113,6 +113,8 @@ class ApplicationController < Sinatra::Base
       redirect to '/books'
     else
       #delete book
+      Book.delete(params[:id])
+      redirect to '/books'
     end
   end
 
