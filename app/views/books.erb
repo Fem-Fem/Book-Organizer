@@ -5,8 +5,7 @@
   <body>
 
     <% @books.each do |book| %>
-    <h1><%= Book.title %></h1>
-    <h1><%= Book.genre %></h1>
+    <h1><a href = '/books/<%=book.id%>'><%= Book.title %></h1>
     <% end %>
 
   </body>
