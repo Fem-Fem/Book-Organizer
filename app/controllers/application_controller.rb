@@ -86,6 +86,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/book/:id' do
+    @book = Book.find(params["id"])
     if session[:user_id] == nil
       redirect to '/homepage'
     else
