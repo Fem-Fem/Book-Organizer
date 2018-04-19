@@ -58,7 +58,7 @@ class ApplicationController < Sinatra::Base
       session[:user_id].delete
       redirect to '/'
     else
-      redirect to '/homepage'
+      redirect to '/'
     end
   end
 
