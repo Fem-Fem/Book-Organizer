@@ -73,7 +73,7 @@ class ApplicationController < Sinatra::Base
 
   get '/books/new' do
     if session[:user_id] == nil
-      redirect to '/homepage'
+      redirect to '/'
     else
       erb :createbook
     end
@@ -88,7 +88,7 @@ class ApplicationController < Sinatra::Base
   get '/book/:id' do
     @book = Book.find(params["id"])
     if session[:user_id] == nil
-      redirect to '/homepage'
+      redirect to '/'
     else
       erb :specificbook
     end
