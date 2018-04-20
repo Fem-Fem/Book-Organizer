@@ -43,11 +43,9 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/login' do
-    binding.pry
     if params["username"] == "" || params["password"] == ""
       redirect to '/login'
     else
-      #password?
       @owner = Owner.find_by(username: params["username"])
       session[:user_id] = @owner.id
       redirect to '/books'
@@ -65,7 +63,6 @@ class ApplicationController < Sinatra::Base
     if session[:user_id] == nil
       redirect to '/'
     else
-      # binding.pry
       @books = Book.all
       erb :books
     end
@@ -81,11 +78,11 @@ class ApplicationController < Sinatra::Base
 
   post '/books/new' do
     @owner = Owner.find(session[:user_id])
-    @owner.book = Book.create(params)
+    @owner.books << Book.create(params)
     redirect to '/books'
   end
 
-  get '/book/:id' do
+  get '/books/:id' do
     @book = Book.find(params["id"])
     if session[:user_id] == nil
       redirect to '/'
