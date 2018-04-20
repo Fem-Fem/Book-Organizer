@@ -11,7 +11,10 @@
     <h1><%=Owner.find(@book.owner_id).username%></h1>
 
     <br></br>
-    <h1><a href = '/books/paramsss/delete'>Delete This Book</a></h1>
+    <h1><a href = '/books/:id/delete'>Delete This Book</a></h1>
+
+    <br></br>
+    <h1><a href = '/books/:id/edit'>Edit This Book</a></h1>
 
 
     <div class = "container">

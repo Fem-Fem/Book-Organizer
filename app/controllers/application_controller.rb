@@ -91,7 +91,7 @@ class ApplicationController < Sinatra::Base
     end
   end
 
-  get '/book/<%= params[:id]%>/edit' do
+  get '/books/:id/edit' do
     if params[:id].user_id != @user.id
       redirect to '/books'
     else
@@ -105,7 +105,7 @@ class ApplicationController < Sinatra::Base
     @book.genre = params["genre"]
   end
 
-  delete '/book/:id/delete' do
+  delete '/books/:id/delete' do
     if params[:id].user_id != @user.id
       redirect to '/books'
     else
