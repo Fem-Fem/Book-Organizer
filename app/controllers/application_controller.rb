@@ -43,6 +43,7 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/login' do
+    binding.pry
     if params["username"] == "" || params["password"] == ""
       redirect to '/login'
     else
@@ -55,18 +56,16 @@ class ApplicationController < Sinatra::Base
 
   get '/logout' do
     if session[:user_id] != nil
-      session[:user_id].delete
-      redirect to '/'
-    else
-      redirect to '/'
+      session[:user_id] = nil
     end
+    redirect to '/'
   end
 
   get '/books' do
     if session[:user_id] == nil
       redirect to '/'
     else
-      binding.pry
+      # binding.pry
       @books = Book.all
       erb :books
     end
