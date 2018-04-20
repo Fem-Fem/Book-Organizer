@@ -28,9 +28,10 @@ class ApplicationController < Sinatra::Base
     if params["username"] == "" || params["password"] == ""
       redirect to '/signup'
     else
-      @owner = Owner.create(params["username"], params["password"])
-      session[:user_id] == @owner.id
-      redirect to '/allbooks'
+      @owner = Owner.create(:username => params["username"],:password => params["password"])
+      session[:user_id] = @owner.id
+      binding.pry
+      redirect to '/books'
     end
   end
 
@@ -38,7 +39,7 @@ class ApplicationController < Sinatra::Base
     if session[:user_id] == nil
       erb :login
     else
-      redirect to '/allbooks'
+      redirect to '/books'
     end
   end
 
@@ -48,8 +49,8 @@ class ApplicationController < Sinatra::Base
     else
       #password?
       @owner = Owner.find_by(username: params["username"])
-      session[:user_id] == @owner.id
-      redirect to '/allbooks'
+      session[:user_id] = @owner.id
+      redirect to '/books'
     end
   end
 
@@ -63,6 +64,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/books' do
+    binding.pry
     if session[:user_id] == nil
       redirect to '/'
     else
